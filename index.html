@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+body{
+    background-image: url(./file-20220126-17-1i0g402.avif);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+        }
+    #md{
+        /* background-image: url(./file-20220126-17-1i0g402.avif); */
+   color: rgb(0, 0, 0);
+   color: white;
+        background-color: rgb(68, 73, 80);
+        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 1px solid rgb(0, 0, 0);
+        /* width: 350px; */
+        box-shadow: 0px 0px 10px 10px rgb(251, 237, 169);
+        /* margin-top: 200px; */
+    }
+    #se{border: 1px solid black;
+        margin-top: 50px;
+        height: 35px;
+        border-radius: 10px;
+        width: 290px;
+        padding-left: 10px;
+       /* text-align: center; */
+    }
+    #btn{
+        height: 30px;
+        width: 100px;
+        font-size: 16px;
+        background-color: rgb(0, 0, 0);
+        color: white;
+        margin-left: 5px;
+
+    }
+    #btn:hover{
+        background-color:white;
+        color: black;
+        font-weight: bold;
+    }
+    </style>
+</head>
+<body>
+<form action="">
+    <input type="search" id="se"  class="te" placeholder="search yout city">
+    <input type="submit" value="search" id="btn">
+
+    <div id="md">
+
+  <h2>City : <span></span></h2>
+   
+  <h2>Temperatute :  <span></span></h2>
+
+  <h2>humidity :  <span></span></h2>
+
+  <h2>pressure : <span></span></h2>
+
+
+    </div>
+</form>
+    
+<script>
+    document.forms[0].addEventListener("submit",function(e){
+        e.preventDefault();
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${e.target[0].value}&appid=bf89bc2cde67abeceea98d4c23a10716`)
+ 
+    .then((val)=>{
+        return val.json()
+    }).then((data)=>{
+        console.log(data)
+
+
+        var a=document.getElementsByTagName("span")
+       a[0].innerText=data.name
+       a[1].innerText=Math.floor(data.main.temp - 273)
+       a[2].innerText=data.main.humidity
+       a[3].innerText=data.main.pressure
+    
+   
+    })
+
+})
+
+</script>
+</body>
+</html>
